@@ -25,10 +25,14 @@ public class Main {
         int nThreads = 4;
 
         MyCallable myCallable = new MyCallable();
-        List<MyCallable> tasks = new ArrayList<>();
+        // Задача печатает несколько сообщений в консоль и завершаться. Результатом возвращает количество отправленных сообщений.
 
+        List<MyCallable> tasks = new ArrayList<>(); //Коллекция с задачами
+
+        //Создание 4 потоков, каждый из которых имеет свое имя.
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
 
+        //Добавляем задачи в коллекцию
         for (int i = 0; i < nThreads; i++) {
             tasks.add(myCallable);
         }
@@ -39,6 +43,7 @@ public class Main {
                 executorService.invokeAll(tasks)) {
             System.out.println("invokeAll. Кол-во выведенных в консоль сообщений " + task.get());
         }
+
         System.out.println("Завершаю все потоки.");
         executorService.shutdown();
     }
